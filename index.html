@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevProfile - Professional Job Card Creator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style></style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="logo">DevProfile</a>
+        <div class="nav-links" id="navLinks">
+            <a href="#" class="nav-link active" data-page="home">Home</a>
+            <a href="#" class="nav-link" data-page="profile">Create Profile</a>
+            <a href="#" class="nav-link" data-page="about">About Us</a>
+            <a href="#" class="nav-link" data-page="contact">Contact Us</a>
+        </div>
+        <div class="navbar-right">
+            <button class="btn btn-primary" id="createProfileBtn">Create Profile</button>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Home Page (Card Gallery) -->
+    <section class="page-section active" id="homePage">
+        <div class="container">
+            <h1 class="page-title">Developer Profiles</h1>
+            
+            <div class="profile-cards-gallery" id="profileCardsGallery">
+                <!-- Profile cards will be generated here -->
+                <div class="empty-state" id="emptyState">
+                    <h2>No profiles created yet</h2>
+                    <p>Create your first professional profile card now!</p>
+                    <button class="btn btn-primary" id="createFirstProfileBtn">Create Profile</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Profile Creation Page -->
+    <section class="page-section" id="profilePage">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Create Your Professional Job Card</h1>
+                </div>
+                
+                <div class="card-body">
+                    <div class="tab-container">
+                        <div class="tabs">
+                            <div class="tab active" data-tab="personal">Personal Info</div>
+                            <div class="tab" data-tab="skills">Skills</div>
+                            <div class="tab" data-tab="experience">Experience</div>
+                            <div class="tab" data-tab="education">Education</div>
+                        </div>
+                        
+                        <!-- Personal Info Tab -->
+                        <div class="tab-content active" id="personalTab">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" class="form-control" placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title</label>
+                                <input type="text" id="jobTitle" class="form-control" placeholder="e.g. Senior Frontend Developer">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" class="form-control" placeholder="your.email@example.com">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="tel" id="phone" class="form-control" placeholder="Your phone number">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <input type="text" id="location" class="form-control" placeholder="City, Country">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="website">Website/Portfolio</label>
+                                        <input type="url" id="website" class="form-control" placeholder="https://yourportfolio.com">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profilePictureContainer">Profile Picture</label>
+                                <div class="file-input-container">
+                                    <label for="profilePicture" class="file-input-label">
+                                        <span id="fileNameDisplay">Choose a profile picture</span>
+                                    </label>
+                                    <input type="file" id="profilePicture" accept="image/*">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="summary">Professional Summary</label>
+                                <textarea id="summary" class="form-control" placeholder="Write a short summary about yourself and your professional experience"></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Skills Tab -->
+                        <div class="tab-content" id="skillsTab">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="skillName">Skill Name</label>
+                                        <input type="text" id="skillName" class="form-control" placeholder="e.g. JavaScript">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="skillLevel">Experience Level</label>
+                                        <select id="skillLevel" class="form-control">
+                                            <option value="1">Beginner</option>
+                                            <option value="2">Intermediate</option>
+                                            <option value="3">Advanced</option>
+                                            <option value="4">Expert</option>
+                                            <option value="5">Master</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="addSkillBtn">Add Skill</button>
+                            
+                            <div id="skillsList"></div>
+                        </div>
+                        
+                        <!-- Experience Tab -->
+                        <div class="tab-content" id="experienceTab">
+                            <div class="form-group">
+                                <label for="jobPosition">Position</label>
+                                <input type="text" id="jobPosition" class="form-control" placeholder="e.g. Frontend Developer">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" class="form-control" placeholder="Company name">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="startDate">Start Date</label>
+                                        <input type="month" id="startDate" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="endDate">End Date</label>
+                                        <input type="month" id="endDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobDescription">Description</label>
+                                <textarea id="jobDescription" class="form-control" placeholder="Describe your responsibilities and achievements"></textarea>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="addExperienceBtn">Add Experience</button>
+                            
+                            <div id="experienceList"></div>
+                        </div>
+                        
+                        <!-- Education Tab -->
+                        <div class="tab-content" id="educationTab">
+                            <div class="form-group">
+                                <label for="degree">Degree/Certificate</label>
+                                <input type="text" id="degree" class="form-control" placeholder="e.g. Bachelor of Science in Computer Science">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="school">Institution</label>
+                                <input type="text" id="school" class="form-control" placeholder="School/University name">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="eduStartDate">Start Date</label>
+                                        <input type="month" id="eduStartDate" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="eduEndDate">End Date</label>
+                                        <input type="month" id="eduEndDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eduDescription">Description</label>
+                                <textarea id="eduDescription" class="form-control" placeholder="Add details about your studies, achievements, etc."></textarea>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="addEducationBtn">Add Education</button>
+                            
+                            <div id="educationList"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+                        <button class="btn btn-primary" id="saveBtn">Save Profile</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preview Section -->
+            <div class="preview-card" id="previewSection" style="display:none;">
+                <div class="preview-sidebar">
+                    <div class="profile-img-container">
+                        <img src="/api/placeholder/150/150" alt="Profile" class="profile-img" id="previewProfileImg">
+                    </div>
+                    
+                    <h2 class="profile-name" id="previewName">John Doe</h2>
+                    <div class="profile-title" id="previewTitle">Frontend Developer</div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item" id="previewEmail">johndoe@example.com</div>
+                        <div class="contact-item" id="previewPhone">+1 123 456 7890</div>
+                        <div class="contact-item" id="previewLocation">New York, USA</div>
+                        <div class="contact-item" id="previewWebsite">portfolio.com</div>
+                    </div>
+                    
+                    <div class="section-title" style="color: white; border-color: white;">Skills</div>
+                    <div id="previewSkills"></div>
+                </div>
+                
+                <div class="preview-main">
+                    <div class="section">
+                        <h3 class="section-title">About Me</h3>
+                        <p id="previewSummary">Experienced frontend developer with a passion for creating responsive and user-friendly web applications. Skilled in JavaScript, React, and modern CSS frameworks.</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Experience</h3>
+                        <div id="previewExperience"></div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title">Education</h3>
+                        <div id="previewEducation"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Us Page -->
+    <section class="page-section" id="aboutPage">
+        <div class="about-page">
+            <h1 class="page-title">About DevProfile</h1>
+            
+            <div class="about-section">
+                <h2>Our Mission</h2>
+                <p>DevProfile is dedicated to helping developers and tech professionals create stunning profile cards that showcase their skills, experience, and achievements. Our mission is to make it easy for tech talents to stand out in a competitive job market.</p>
+            </div>
+            
+            <div class="about-section">
+                <h2>What We Offer</h2>
+                <p>Our platform provides a simple and intuitive interface to create professional profile cards that highlight your technical expertise and accomplishments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Page -->
+    <section class="page-section" id="contactPage">
+        <div class="contact-page">
+            <h1 class="page-title">Contact Us</h1>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="contactName">Your Name</label>
+                    <input type="text" id="contactName" class="form-control" placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactEmail">Email Address</label>
+                    <input type="email" id="contactEmail" class="form-control" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactSubject">Subject</label>
+                    <input type="text" id="contactSubject" class="form-control" placeholder="Message subject">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactMessage">Message</label>
+                    <textarea id="contactMessage" class="form-control" rows="5" placeholder="Your message"></textarea>
+                </div>
+                
+                <button class="btn btn-primary" id="sendMessageBtn">Send Message</button>
+            </div>
+            
+            <div class="contact-info-section">
+                <div class="contact-info-item">
+                    <h3>Email</h3>
+                    <p>support@devprofile.com</p>
+                </div>
+                
+                <div class="contact-info-item">
+                    <h3>Phone</h3>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                
+                <div class="contact-info-item">
+                    <h3>Location</h3>
+                    <p>123 Tech Street, San Francisco, CA 94107</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Include JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
